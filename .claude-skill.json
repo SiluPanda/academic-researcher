@@ -1,0 +1,54 @@
+{
+  "name": "academic-researcher",
+  "description": "Expert-level academic research and LaTeX paper writing with IEEE/APA citation support",
+  "version": "1.0.0",
+  "author": "Academic Researcher",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/academic-researcher/skill.git"
+  },
+  "platforms": {
+    "claude-code": {
+      "global": "~/.claude/skills/",
+      "project": ".claude/skills/"
+    },
+    "opencode": {
+      "global": "~/.config/opencode/skills/",
+      "project": ".opencode/skills/"
+    },
+    "codex": {
+      "global": "~/.codex/skills/",
+      "project": ".codex/skills/"
+    },
+    "gemini-cli": {
+      "global": "~/.gemini/skills/",
+      "project": ".gemini/skills/"
+    },
+    "cursor": {
+      "global": "~/.cursor/skills/",
+      "project": ".cursor/skills/"
+    },
+    "windsurf": {
+      "global": "~/.windsurf/skills/",
+      "project": ".windsurf/skills/"
+    }
+  },
+  "files": [
+    "SKILL.md",
+    "references/",
+    "examples/"
+  ],
+  "keywords": [
+    "academic-researcher",
+    "claude-code",
+    "opencode",
+    "ai-agent",
+    "skill",
+    "research",
+    "academic",
+    "latex",
+    "paper",
+    "thesis"
+  ]
+}

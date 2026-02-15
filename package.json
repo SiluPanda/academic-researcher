@@ -1,0 +1,46 @@
+{
+  "name": "academic-researcher-skill",
+  "version": "1.0.0",
+  "description": "Expert-level academic research skill for AI coding assistants. Creates peer-reviewed research papers, literature reviews, and theses with IEEE/APA citations and LaTeX output.",
+  "author": "Academic Researcher",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/academic-researcher/skill.git"
+  },
+  "keywords": [
+    "academic-researcher",
+    "claude-code",
+    "opencode",
+    "ai-agent",
+    "skill",
+    "research",
+    "academic",
+    "latex",
+    "paper",
+    "thesis"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "SKILL.md",
+    "references/",
+    "examples/",
+    "install-skill.js",
+    "uninstall-skill.js",
+    ".claude-skill.json"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "postinstall": "node install-skill.js",
+    "preuninstall": "node uninstall-skill.js"
+  },
+  "bugs": {
+    "url": "https://github.com/academic-researcher/skill/issues"
+  },
+  "homepage": "https://github.com/academic-researcher/skill#readme"
+}
