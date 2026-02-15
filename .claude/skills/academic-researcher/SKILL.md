@@ -18,6 +18,13 @@ I help you create expert-level academic research documents with:
 - LaTeX output for professional mathematical typesetting
 - Quality assurance against scholarly standards
 
+## Non-Negotiables (Research Integrity)
+
+- **No fabricated citations**: never cite papers you did not locate and verify (title, authors, venue, year, DOI/URL).
+- **Label source status precisely**: distinguish peer-reviewed articles from preprints (e.g., arXiv) and from non-academic web sources.
+- **Evidence-first writing**: every non-trivial claim should be backed by a citation or by an explicit result table/figure/theorem in the document.
+- **Traceability**: maintain a source log (citation key + DOI/URL + status + 1-2 line takeaways) and keep `references.bib` as the single source of truth.
+
 ## When to Use Me
 
 Use this skill when you need to write:
@@ -98,23 +105,19 @@ Before starting, clarify with the user:
 | ScienceDirect | General science |
 | JSTOR | Humanities, social sciences |
 
-### Search Command Pattern
+### Search Command Patterns (Tool-Agnostic)
 
-Use the platform's web search with these strategies:
+Use your platform's browsing/search tool. If browsing is unavailable, ask the user to provide PDFs/DOIs/URLs (or an existing `references.bib`) and proceed from those.
 
-```
-# Broad search first
-web_search "broad topic research"
+Query patterns to use:
 
-# Specific with time filter
-web_search "specific topic 2023..2025"
+- Broad first: `broad topic` + `survey` / `review`
+- Recent window: add a year range (e.g., `2022..2026`) or use the tool's recency filter
+- Exact phrase: `"exact phrase"`
+- Boolean combos: `(term1 AND term2) OR term3`
+- Snowballing: find "references" (backward) and "cited by" (forward) from 2-3 anchor papers
 
-# Exact phrase
-web_search "\"exact phrase\" research"
-
-# Combine terms
-web_search "term1 AND term2 OR term3"
-```
+For systematic reviews, keep a reproducible search log (see `references/systematic-review-prisma.md`).
 
 ---
 
@@ -158,19 +161,25 @@ For each source, verify:
 
 ### Source Tracking
 
-Create a source database:
+Create a source database (and keep `references.bib` as the single source of truth):
 
 ```markdown
 ## Source [N]
+- **Citation Key:** [e.g., smith2023transformers]
 - **Title:** [Paper title]
 - **Authors:** [Author list]
-- **Venue:** [Journal/Conference, Year]
-- **Citations:** [Count]
-- **URL:** [Link]
+- **Venue/Year:** [Journal/Conference, Year]
+- **Status:** [peer-reviewed / preprint / standard / dataset / software]
+- **DOI:** [If available]
+- **URL:** [Canonical link]
+- **Citations:** [Count + date checked]
 - **Relevance:** [High/Medium/Low]
-- **Key Points:** [Summary]
-- **For:** [Which section of paper]
+- **Key Points:** [1-3 bullets: what you will cite]
+- **Limitations:** [1-2 bullets]
+- **Use In:** [Which section of your document]
 ```
+
+See `references/source-evaluation.md` and `references/bibliography-workflows.md`.
 
 ---
 
@@ -227,6 +236,22 @@ Create a source database:
 7. References
 ```
 
+### Systematic Review Structure (PRISMA-Style)
+
+```
+1. Title
+2. Abstract
+3. Introduction (scope + research questions)
+4. Methods (protocol, databases, queries, screening, extraction, appraisal)
+5. Results (selection counts + evidence tables + taxonomy)
+6. Discussion (implications, limitations, threats to validity)
+7. Conclusion (what is known + gaps + future directions)
+8. References
+9. Appendices (full queries, screening reasons, extraction schema)
+```
+
+See `references/systematic-review-prisma.md`.
+
 ### Thesis Structure
 
 ```
@@ -258,51 +283,49 @@ Create a source database:
 
 ### LaTeX Document Setup
 
-For research papers, use this basic structure:
+Prefer starting from the included templates:
+- `references/templates/ieee-conference.tex` (IEEE conference paper)
+- `references/templates/literature-review.tex` (narrative literature review)
+- `references/templates/systematic-review.tex` (systematic review)
+- `references/templates/thesis.tex` (thesis/dissertation)
+- `references/templates/apa7-manuscript.tex` (APA 7 manuscript)
+
+Minimal IEEE skeleton (BibTeX):
 
 ```latex
 \documentclass[conference]{IEEEtran}
-\usepackage{amsmath}
-\usepackage{amssymb}
+\IEEEoverridecommandlockouts
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
-\usepackage[caption=false,font=normalsize]{subfig}
+\usepackage{xcolor}
 
 \title{Your Paper Title}
-\author{Author Name$^{1\ast}$, Co-Author$^{2$}
-\thanks{$^{\ast}$Corresponding author: email@example.edu}
-\thanks{$^{1}$Department, University Name}
-\thanks$^{2}$Department, University Name}}
+
+\author{
+\IEEEauthorblockN{First Author}
+\IEEEauthorblockA{Department, University\\
+City, Country\\
+email@example.edu}
+}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Your abstract goes here (150-250 words).
-\end abstract}
+Your abstract goes here (150--250 words).
+\end{abstract}
 
 \begin{IEEEkeywords}
-keyword1, keyword2, keyword3, keyword4, keyword5
+keyword1, keyword2, keyword3
 \end{IEEEkeywords}
 
 \section{Introduction}
 ...
 
-\section{Related Work}
-...
-
-\section{Methodology}
-...
-
-\section{Results}
-...
-
-\section{Discussion}
-...
-
-\section{Conclusion}
-...
-
-\section*{References}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
 \end{document}
 ```
 
@@ -363,10 +386,10 @@ a_{21} & a_{22}
 
 **Proofs:**
 ```latex
-\begin{Proof}
+\begin{proof}
 Let $x$ be any element...
 Therefore, we conclude...
-\end{Proof}
+\end{proof}
 ```
 
 See `references/latex-math-guide.md` for more examples.
@@ -381,7 +404,7 @@ See `references/latex-math-guide.md` for more examples.
 - [ ] Clear research question/objective
 - [ ] Logical flow and organization
 - [ ] Minimum 15-20 sources for full paper
-- [ ] All sources verified as peer-reviewed
+- [ ] All sources verified and labeled (peer-reviewed vs preprint vs other)
 - [ ] All claims supported by citations
 - [ ] Methodology clearly explained
 - [ ] Results clearly presented with metrics
@@ -403,9 +426,30 @@ See `references/latex-math-guide.md` for more examples.
 - [ ] Abstract matches content
 - [ ] Keywords present
 
+**Evidence & Citations:**
+- [ ] No invented citations; every reference is verifiable (title/authors/venue/year/DOI or canonical URL)
+- [ ] Every citation key used in LaTeX exists in `references.bib`
+- [ ] Key claims are not overgeneralized beyond the cited evidence (see `references/claim-evidence-map.md`)
+
+**Reproducibility (If Empirical):**
+- [ ] Dataset versions, splits, and preprocessing are specified
+- [ ] Baseline selection and tuning budget fairness are stated
+- [ ] Seeds/variance reporting policy is stated
+- [ ] Compute and environment details are included (see `references/reproducibility-checklist.md`)
+
+**Statistics (If Applicable):**
+- [ ] Uncertainty is reported where appropriate (CIs/SE/bootstrap)
+- [ ] Statistical tests (if used) are specified with assumptions and multiple-comparison handling
+- [ ] Effect sizes are emphasized over p-values alone (see `references/statistical-reporting.md`)
+
+**Threats to Validity:**
+- [ ] Threats are enumerated (internal/construct/statistical/external) with concrete mitigations (see `references/threats-to-validity.md`)
+
 ---
 
 ## Citation Formats
+
+Prefer managing references via `references.bib` (BibTeX/BibLaTeX) and generating the reference list automatically; see `references/bibliography-workflows.md`. The examples below are reference list patterns for manual verification.
 
 ### IEEE Format
 
@@ -454,14 +498,21 @@ I generate `.tex` files that you can compile with:
 ### Compilation Commands
 
 ```bash
-# With pdflatex
+# IEEE-style (BibTeX)
 pdflatex paper.tex
 bibtex paper
 pdflatex paper.tex
 pdflatex paper.tex
 
-# With XeLaTeX (for better font support)
-xelatex paper.tex
+# APA-style (BibLaTeX + biber)
+pdflatex paper.tex
+biber paper
+pdflatex paper.tex
+pdflatex paper.tex
+
+# Or use latexmk (recommended if available)
+latexmk -pdf -bibtex paper.tex
+latexmk -pdf -usebiber paper.tex
 ```
 
 ### Alternative Outputs
@@ -487,5 +538,13 @@ If LaTeX is not suitable, I can also generate:
 - `references/ieee-citation-guide.md` - Complete IEEE reference examples
 - `references/apa-citation-guide.md` - Complete APA reference examples
 - `references/latex-math-guide.md` - LaTeX math typesetting examples
-- `references/templates/` - Paper and thesis templates
-- `examples/vocabulary-template.md` - Research vocabulary template
+- `references/bibliography-workflows.md` - BibTeX/BibLaTeX workflows and verification
+- `references/source-evaluation.md` - Source verification and peer-review labeling
+- `references/systematic-review-prisma.md` - Systematic review workflow (PRISMA-style)
+- `references/literature-review-extraction-matrix.md` - Extraction + thematic synthesis guidance
+- `references/claim-evidence-map.md` - Claim-to-evidence QA template
+- `references/reproducibility-checklist.md` - Reproducibility QA checklist
+- `references/statistical-reporting.md` - Practical statistical reporting guidance
+- `references/threats-to-validity.md` - Threats-to-validity prompts
+- `references/templates/` - LaTeX templates (IEEE, APA, thesis, reviews)
+- `examples/` - Protocols and working templates (vocabulary, extraction matrix, claim-evidence map)

@@ -1,0 +1,40 @@
+% APA 7th edition manuscript template (LaTeX)
+% Requires: apa7 + biblatex + biblatex-apa + biber (Overleaf supports this).
+%
+% Compile (local): latexmk -pdf -interaction=nonstopmode -bibtex -usebiber apa7-manuscript.tex
+% Compile (Overleaf): set "Biber" as the bibliography tool.
+
+\documentclass[man]{apa7}
+
+\usepackage[american]{babel}
+\usepackage{csquotes}
+
+\usepackage[style=apa,backend=biber,natbib=true,sortcites=true]{biblatex}
+\addbibresource{references.bib}
+
+\title{Your Paper Title}
+\shorttitle{SHORT TITLE}
+\author{Your Name}
+\affiliation{Your Institution}
+
+\abstract{Write a 150--250 word abstract that summarizes the problem, method, main results, and implications.}
+\keywords{keyword1, keyword2, keyword3}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+Summarize the research context and motivation \parencite{smith2023}. State your research question and contributions.
+
+\section{Method}
+Describe data, participants (if applicable), procedures, and analysis.
+
+\section{Results}
+Report results with appropriate uncertainty (e.g., confidence intervals).
+
+\section{Discussion}
+Interpret findings, acknowledge limitations, and connect to prior work.
+
+\printbibliography
+
+\end{document}

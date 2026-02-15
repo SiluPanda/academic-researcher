@@ -10,6 +10,7 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage[caption=false,font=footnotesize]{subfig}
 \usepackage{algorithm}
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
@@ -29,21 +30,17 @@
 %/Keywords (keyword1, keyword2, keyword3)
 %}
 
-% Theorem definitions
-\newtheoremstyle{math}
-  {\topsep}{\topsep}{\itshape}{0pt}{\bfseries}{.}{5pt plus 1pt minus 1pt}{}
-\theoremstyle{math}
-\newtheorem theorem}{Theorem}
-\newtheorem definition}{Definition}
-\newtheorem lemma}{Lemma}
-\newtheorem corollary}{Corollary}
-\newtheorem proof}{Proof}
+% Theorem definitions (optional)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
 
 % Title
-\title{
-  \thanks{This work was supported by [Funding Agency/Grant Number].}
-  Title of Your Research Paper: A Comprehensive Approach
-}
+\title{Title of Your Research Paper: A Comprehensive Approach%
+\thanks{This work was supported by [Funding Agency/Grant Number].}}
 
 % Authors
 \author{
@@ -79,7 +76,7 @@ Experimental results on [dataset/benchmark] demonstrate that our approach achiev
 The key contributions of this work include: (1) a novel [contribution 1], 
 (2) an improved [contribution 2], and (3) extensive evaluation on [evaluation setup]. 
 Our findings suggest that [main insight] with implications for [application domain].
-\end abstract}
+\end{abstract}
 
 % Keywords
 \begin{IEEEkeywords}
@@ -168,7 +165,7 @@ Figure~\ref{fig:overview} shows the overall architecture of our system.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.9\linewidth]{fig1.pdf}
+\fbox{\parbox[c][1.2in][c]{0.9\linewidth}{\centering Placeholder for system overview figure.}}
 \caption{System overview showing the main components.}
 \label{fig:overview}
 \end{figure}
@@ -226,14 +223,14 @@ Algorithm~\ref{alg:algorithm} summarizes the training procedure.
 
 We now provide theoretical guarantees for our approach.
 
-\begin theorem}
+\begin{theorem}
 Under assumptions A1-A3, our algorithm converges to a stationary point 
 at a rate of $\mathcal{O}(1/T)$.
-\end theorem}
+\end{theorem}
 
-\begin proof}
-[Proof details here...] \qed
-\end proof}
+\begin{proof}
+[Proof sketch here...]
+\end{proof}
 
 \section{Experimental Results}
 \label{sec:experiments}
@@ -292,16 +289,16 @@ Figure~\ref{fig:results} shows the performance across different settings.
 
 \begin{figure}[htbp]
 \centering
-\subfloat[Dataset A]{\includegraphics[width=0.45\linewidth]{fig2a.pdf}}
+\subfloat[Dataset A]{\fbox{\parbox[c][1.0in][c]{0.45\linewidth}{\centering Placeholder}}}
 \hfill
-\subfloat[Dataset B]{\includegraphics[width=0.45\linewidth]{fig2b.pdf}}
+\subfloat[Dataset B]{\fbox{\parbox[c][1.0in][c]{0.45\linewidth}{\centering Placeholder}}}
 \caption{Performance comparison: (a) on Dataset A, (b) on Dataset B.}
 \label{fig:results}
 \end{figure}
 
 \subsection{Ablation Study}
 
-Table~\ ablation-studies the contribution of each component.
+Table~\ref{tab:ablation} summarizes the contribution of each component.
 
 \begin{table}[htbp]
 \caption{Ablation study results.}

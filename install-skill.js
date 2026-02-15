@@ -23,14 +23,43 @@ function getHomeDir() {
 }
 
 function getProjectRoot() {
+  if (process.env.INIT_CWD && fs.existsSync(process.env.INIT_CWD)) {
+    return process.env.INIT_CWD;
+  }
+
   let current = process.cwd();
   while (current !== path.parse(current).root) {
-    if (fs.existsSync(path.join(current, '.git'))) {
+    if (
+      fs.existsSync(path.join(current, 'package.json')) ||
+      fs.existsSync(path.join(current, '.git'))
+    ) {
       return current;
     }
     current = path.dirname(current);
   }
   return process.cwd();
+}
+
+function resolveInstallScope() {
+  const args = new Set(process.argv.slice(2));
+  if (args.has('--global')) return 'global';
+  if (args.has('--project')) return 'project';
+  if (args.has('--skip')) return 'none';
+
+  const envScope = (process.env.SKILL_INSTALL_SCOPE || '').trim().toLowerCase();
+  if (envScope === 'global' || envScope === 'project') return envScope;
+  if (envScope === 'none' || envScope === 'skip') return 'none';
+
+  const npmGlobal =
+    process.env.npm_config_global === 'true' || process.env.npm_config_location === 'global';
+  if (npmGlobal) return 'global';
+
+  // Avoid surprising writes when installed as a local project dependency.
+  const invokedByNpm = Boolean(process.env.npm_lifecycle_event);
+  if (invokedByNpm) return 'none';
+
+  // Manual invocation defaults to a project install.
+  return 'project';
 }
 
 function ensureDir(dir) {
@@ -48,7 +77,7 @@ function copyFile(src, dest) {
   return false;
 }
 
-function copyDir(src, dest, files) {
+function copyDir(src, dest) {
   if (!fs.existsSync(src)) return;
   ensureDir(dest);
   
@@ -66,11 +95,9 @@ function copyDir(src, dest, files) {
   }
 }
 
-function installToPlatform(platformName, globalPath, projectPath) {
-  const isGlobal = !process.env.PWD || process.env.PWD === getHomeDir() || !fs.existsSync(path.join(process.cwd(), 'package.json'));
-  
+function installToPlatform(platformName, scope, globalPath, projectPath) {
   let targetDir;
-  if (isGlobal) {
+  if (scope === 'global') {
     targetDir = globalPath.replace('~', getHomeDir());
   } else {
     targetDir = path.join(getProjectRoot(), projectPath);
@@ -78,7 +105,7 @@ function installToPlatform(platformName, globalPath, projectPath) {
   
   const skillDir = path.join(targetDir, skillName);
   
-  console.log(`Installing to ${platformName} (${isGlobal ? 'global' : 'project'}): ${skillDir}`);
+  console.log(`Installing to ${platformName} (${scope}): ${skillDir}`);
   
   try {
     ensureDir(skillDir);
@@ -108,12 +135,18 @@ function installToPlatform(platformName, globalPath, projectPath) {
 console.log(`\n📦 Installing skill: ${skillName}\n`);
 
 const platformsToInstall = ['claude-code', 'opencode', 'codex', 'gemini-cli', 'cursor', 'windsurf'];
+const scope = resolveInstallScope();
+
+if (scope === 'none') {
+  console.log('Skipping automatic install (set SKILL_INSTALL_SCOPE=project|global or pass --project/--global).');
+  process.exit(0);
+}
 
 for (const platform of platformsToInstall) {
   if (platforms[platform]) {
     const platformConfig = platforms[platform];
     if (platformConfig.global) {
-      installToPlatform(platform, platformConfig.global, platformConfig.project);
+      installToPlatform(platform, scope, platformConfig.global, platformConfig.project);
     }
   }
 }

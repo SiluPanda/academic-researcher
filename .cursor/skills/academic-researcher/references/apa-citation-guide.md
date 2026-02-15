@@ -19,19 +19,19 @@ Author, A. A., & Author, B. B. (2023). Title of article with DOI. Journal Name, 
 Author, A. A. (2023). Title of online article. Journal Name, 10(2), 1-15. https://doi.org/10.1000/xyz123
 ```
 
-### No DOI (Retrieved from Database)
+### No DOI (Common Databases)
 ```latex
-Author, A. A., & Author, B. B. (2023). Title of article. Journal Name, 10(3), 123-145. https://doi.org/10.1000/xyz123
+Author, A. A., & Author, B. B. (2023). Title of article. Journal Name, 10(3), 123-145.
 ```
 
 ## Conference Papers
 
-### Conference Proceedings
+### Conference Proceedings (Published)
 ```latex
-Author, A. A., & Author, B. B. (Year, Month). Title of paper. In Conference Name (Ed.). Publisher. https://xxxxx
+Author, A. A., & Author, B. B. (2023, June). Title of paper. In E. E. Editor (Ed.), Proceedings of the Conference Name (pp. 123-130). Publisher. https://doi.org/xxxxx
 ```
 
-### With Location
+### Conference Proceedings (No DOI/URL)
 ```latex
 Author, A. A., & Author, B. B. (2023, June). Title of paper. In Proceedings of the Conference Name (pp. 123-130). Publisher.
 ```
@@ -151,7 +151,7 @@ as cited in Smith (2023)
 |--------|-----|------|
 | Order | Alphabetical by author | Numbered by appearance |
 | Format | Author-Date | [Number] |
-| Et al. | 3+ authors in subsequent citations | 6+ authors |
+| Et al. | 3+ authors in in-text citations (from first citation) | 6+ authors |
 | DOI | Required when available | Preferred |
 | Italics | Journal name italicized | Journal name abbreviated |
 

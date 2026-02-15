@@ -19,9 +19,11 @@
 `academic-researcher` is a comprehensive skill for AI coding assistants (OpenCode, Claude Code, Gemini CLI, Codex, Cursor, Windsurf) that enables creation of peer-reviewed research papers, literature reviews, and theses with:
 
 - **Source Discovery**: Web search for peer-reviewed academic sources
-- **IEEE/APA Citations**: Complete citation format guides
+- **Source Verification**: Peer-reviewed vs preprint labeling + quality signals
+- **Systematic Reviews**: PRISMA-style workflow + extraction matrix templates
+- **IEEE/APA Citations**: Citation guides + BibTeX/BibLaTeX workflows
 - **LaTeX Output**: Professional mathematical typesetting
-- **Quality Assurance**: Pre-submission checklists
+- **Quality Assurance**: Claim-evidence mapping, reproducibility, threats-to-validity, stats checks
 - **Multi-Platform**: Works with 6+ AI coding assistants
 
 ## Installation
@@ -32,9 +34,11 @@
 # Global installation
 npm install -g academic-researcher-skill
 
-# Or project-level installation
-npm install --save-dev academic-researcher-skill
+# Project-level installation (opt-in; writes into .claude/.codex/... in the repo)
+SKILL_INSTALL_SCOPE=project npm install --save-dev academic-researcher-skill
 ```
+
+Local installs default to a no-op to avoid surprising writes; you can also run `node install-skill.js --project`.
 
 ### Option 2: npx skills add (Per Platform)
 
@@ -160,29 +164,49 @@ See `references/latex-math-guide.md` for math typesetting examples.
 
 ### Quality Assurance
 - Pre-submission checklist
-- Citation verification
-- Academic tone check
+- Claim-evidence mapping
+- Bibliography and citation-key verification
+- Reproducibility + threats-to-validity checklists
 
 ## File Structure
 
 ```
 academic-researcher-skill/
 ├── SKILL.md                    # Main skill definition
+├── index.js                    # Package entrypoint (exports canonical paths)
 ├── package.json                # npm package configuration
 ├── .claude-skill.json         # Installation configuration
 ├── install-skill.js           # Installation script
 ├── uninstall-skill.js         # Uninstallation script
+├── scripts/
+│   ├── sync-platform-skills.js
+│   └── check-citations.js
 ├── LICENSE                    # MIT License
 ├── references/
+│   ├── bibliography-workflows.md
+│   ├── source-evaluation.md
+│   ├── systematic-review-prisma.md
+│   ├── literature-review-extraction-matrix.md
+│   ├── claim-evidence-map.md
+│   ├── reproducibility-checklist.md
+│   ├── statistical-reporting.md
+│   ├── threats-to-validity.md
 │   ├── ieee-citation-guide.md
 │   ├── apa-citation-guide.md
 │   ├── latex-math-guide.md
 │   └── templates/
 │       ├── ieee-conference.tex
-│       └── thesis.tex
+│       ├── apa7-manuscript.tex
+│       ├── literature-review.tex
+│       ├── systematic-review.tex
+│       ├── thesis.tex
+│       └── references.bib
 └── examples/
+    ├── sample-outline.md
     ├── vocabulary-template.md
-    └── sample-outline.md
+    ├── systematic-review-protocol-template.md
+    ├── extraction-matrix-template.csv
+    └── claim-evidence-map-template.md
 ```
 
 ## Output Formats
@@ -192,9 +216,15 @@ academic-researcher-skill/
 The skill generates LaTeX source files that you can compile to PDF:
 
 ```bash
-# With pdflatex
+# IEEE-style (BibTeX)
 pdflatex paper.tex
 bibtex paper
+pdflatex paper.tex
+pdflatex paper.tex
+
+# APA-style (BibLaTeX + biber)
+pdflatex paper.tex
+biber paper
 pdflatex paper.tex
 pdflatex paper.tex
 
@@ -245,10 +275,12 @@ Skill: [Creates structured chapter with proper academic tone]
 # Install dependencies
 npm install
 
-# Test installation script
-node install-skill.js
+# Test project installation script
+node install-skill.js --project
+ls -la .claude/skills/academic-researcher/
 
-# Verify installation
+# Test global installation script (optional)
+node install-skill.js --global
 ls -la ~/.claude/skills/academic-researcher/
 ```
 

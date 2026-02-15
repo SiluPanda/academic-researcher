@@ -161,35 +161,36 @@ a_{m1} & a_{m2} & \dots & a_{mn} & b_m
 ```latex
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}{Definition}
-\newtheoremlemma}{Lemma}
-\newtheoremproof}{Proof}
+\newtheorem{lemma}{Lemma}
+
+% amsthm already provides a proof environment:
+% \begin{proof} ... \end{proof}
 ```
 
 ### Theorem Example
 ```latex
-\begin theorem}
+\begin{theorem}
 Let $f$ be a continuous function on $[a,b]$. Then...
-\end theorem}
+\end{theorem}
 ```
 
 ### Proof Example
 ```latex
-\begin{Proof}
+\begin{proof}
 Let $x$ be any element of the set. 
 Since $x$ satisfies property $P$, we have...
 Therefore, the theorem holds.
-\end{Proof}
+\end{proof}
 ```
 
 ### QED Symbol
 ```latex
-\begin{Proof}
+\begin{proof}
 [proof content]
-\qquad\qquad\blacksquare
-\end{Proof}
+\end{proof}
 ```
 
-Or use: `\qed`
+The QED symbol is added automatically at the end of a `proof` environment.
 
 ## Numbering
 

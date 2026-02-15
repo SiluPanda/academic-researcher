@@ -1,0 +1,52 @@
+% Narrative literature review template (LaTeX)
+% This is a lightweight starting point for surveys/related-work sections.
+
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage[numbers]{natbib}
+
+\title{Title of Literature Review}
+\author{Author Name}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+State the scope of the review, the selection methodology (briefly), and the main themes and gaps (150--250 words).
+\end{abstract}
+
+\section{Introduction}
+Define the problem area and why it matters. Clarify the scope and what is out-of-scope.
+
+\section{Method (Source Selection)}
+Describe where you searched (databases), the time window, and the inclusion/exclusion criteria. This is required for defensible reviews.
+
+\section{Thematic Synthesis}
+Organize work by themes rather than by paper-by-paper summaries.
+
+\subsection{Theme A}
+Summarize what is known and where results agree or disagree \citep{smith2023,jones2022}.
+
+\subsection{Theme B}
+Compare approaches under consistent dimensions (assumptions, data, metrics, settings).
+
+\section{Open Problems and Gaps}
+List gaps backed by evidence (e.g., missing ablations, weak external validity, lack of reproducibility artifacts).
+
+\section{Conclusion}
+Summarize themes and propose future directions.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
+

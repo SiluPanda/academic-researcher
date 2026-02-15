@@ -23,9 +23,16 @@ function getHomeDir() {
 }
 
 function getProjectRoot() {
+  if (process.env.INIT_CWD && fs.existsSync(process.env.INIT_CWD)) {
+    return process.env.INIT_CWD;
+  }
+
   let current = process.cwd();
   while (current !== path.parse(current).root) {
-    if (fs.existsSync(path.join(current, '.git'))) {
+    if (
+      fs.existsSync(path.join(current, 'package.json')) ||
+      fs.existsSync(path.join(current, '.git'))
+    ) {
       return current;
     }
     current = path.dirname(current);
@@ -33,19 +40,49 @@ function getProjectRoot() {
   return process.cwd();
 }
 
+function resolveUninstallScope() {
+  const args = new Set(process.argv.slice(2));
+  if (args.has('--global')) return 'global';
+  if (args.has('--project')) return 'project';
+  if (args.has('--skip')) return 'none';
+
+  const envScope = (process.env.SKILL_UNINSTALL_SCOPE || '').trim().toLowerCase();
+  if (envScope === 'global' || envScope === 'project') return envScope;
+  if (envScope === 'none' || envScope === 'skip') return 'none';
+
+  const npmGlobal =
+    process.env.npm_config_global === 'true' || process.env.npm_config_location === 'global';
+  if (npmGlobal) return 'global';
+
+  // Avoid surprising deletes when removed as a local project dependency.
+  const invokedByNpm = Boolean(process.env.npm_lifecycle_event);
+  if (invokedByNpm) return 'none';
+
+  // Manual invocation defaults to a project uninstall.
+  return 'project';
+}
+
+function rmrf(p) {
+  if (typeof fs.rmSync === 'function') {
+    fs.rmSync(p, { recursive: true, force: true });
+    return;
+  }
+
+  // Node < 14.14 fallback.
+  fs.rmdirSync(p, { recursive: true });
+}
+
 function removeDir(dir) {
   if (fs.existsSync(dir)) {
-    fs.rmSync(dir, { recursive: true, force: true });
+    rmrf(dir);
     return true;
   }
   return false;
 }
 
-function uninstallFromPlatform(platformName, globalPath, projectPath) {
-  const isGlobal = !process.env.PWD || process.env.PWD === getHomeDir() || !fs.existsSync(path.join(process.cwd(), 'package.json'));
-  
+function uninstallFromPlatform(platformName, scope, globalPath, projectPath) {
   let targetDir;
-  if (isGlobal) {
+  if (scope === 'global') {
     targetDir = globalPath.replace('~', getHomeDir());
   } else {
     targetDir = path.join(getProjectRoot(), projectPath);
@@ -53,7 +90,7 @@ function uninstallFromPlatform(platformName, globalPath, projectPath) {
   
   const skillDir = path.join(targetDir, skillName);
   
-  console.log(`Uninstalling from ${platformName} (${isGlobal ? 'global' : 'project'}): ${skillDir}`);
+  console.log(`Uninstalling from ${platformName} (${scope}): ${skillDir}`);
   
   try {
     if (removeDir(skillDir)) {
@@ -69,12 +106,18 @@ function uninstallFromPlatform(platformName, globalPath, projectPath) {
 console.log(`\n🗑️  Uninstalling skill: ${skillName}\n`);
 
 const platformsToUninstall = ['claude-code', 'opencode', 'codex', 'gemini-cli', 'cursor', 'windsurf'];
+const scope = resolveUninstallScope();
+
+if (scope === 'none') {
+  console.log('Skipping automatic uninstall (set SKILL_UNINSTALL_SCOPE=project|global or pass --project/--global).');
+  process.exit(0);
+}
 
 for (const platform of platformsToUninstall) {
   if (platforms[platform]) {
     const platformConfig = platforms[platform];
     if (platformConfig.global) {
-      uninstallFromPlatform(platform, platformConfig.global, platformConfig.project);
+      uninstallFromPlatform(platform, scope, platformConfig.global, platformConfig.project);
     }
   }
 }

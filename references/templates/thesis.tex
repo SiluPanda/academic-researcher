@@ -1,8 +1,8 @@
 % PhD Thesis / Master's Thesis Template
 % Compatible with most universities (adjust as needed)
-% Use with book class or report class
+% Use with the book class by default (frontmatter/mainmatter are supported).
 
-\documentclass[12pt]{report}
+\documentclass[12pt,oneside]{book}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{mathptmx}  % Times New Roman
@@ -12,8 +12,9 @@
 \usepackage{color}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{hyperref}
-\usepackage[chapter]{algorithm}
+\usepackage{algorithm}
 \usepackage{algorithmicx}
+\usepackage{algpseudocode}
 \usepackage{amsthm}
 \usepackage{setspace}
 \usepackage{geometry}
@@ -23,7 +24,7 @@
 
 % Page margins (adjust for your university)
 \geometry{
-  a4paper,
+  letterpaper,
   left=1.5in,
   right=1in,
   top=1in,
@@ -38,15 +39,14 @@
   urlcolor=blue
 }
 
-% Theorem environments
-\newtheoremstyle{ Thesis}
-  {\topsep}{\topsep}{\itshape}{0pt}{\bfseries}{.}{5pt plus 1pt minus 1pt}{}
-\theoremstyle{dissertation}
-\newtheorem theorem}{Theorem}
-\newtheorem definition}{Definition}
-\newtheorem lemma}{Lemma}
-\newtheorem proposition}{Proposition}
-\newtheorem corollary}{Corollary}
+% Theorem environments (optional)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
 
 % Chapter title format
 \titleformat{\chapter}
@@ -85,20 +85,6 @@
   \fontsize{12pt}{\baselineskip}Department of Computer Science\\
   University Name\\
   City, State, Country
-}
-
-% Committee Page
-\committee{
-  Dr. Committee Chair Name (Chair)\\
-  Dr. Committee Member Name\\
-  Dr. Committee Member Name\\
-  Dr. External Member Name
-}
-
-% Copyright page
-\copyrightpage{
-  \copyright\ Your Name, 2024\\
-  All Rights Reserved
 }
 
 \begin{document}

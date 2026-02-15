@@ -1,6 +1,6 @@
 {
   "name": "academic-researcher-skill",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Expert-level academic research skill for AI coding assistants. Creates peer-reviewed research papers, literature reviews, and theses with IEEE/APA citations and LaTeX output.",
   "author": "Academic Researcher",
   "repository": {
@@ -25,9 +25,11 @@
     "node": ">=14.0.0"
   },
   "files": [
+    "index.js",
     "SKILL.md",
     "references/",
     "examples/",
+    "scripts/",
     "install-skill.js",
     "uninstall-skill.js",
     ".claude-skill.json"
@@ -37,7 +39,9 @@
   },
   "scripts": {
     "postinstall": "node install-skill.js",
-    "preuninstall": "node uninstall-skill.js"
+    "preuninstall": "node uninstall-skill.js",
+    "sync:platforms": "node scripts/sync-platform-skills.js",
+    "check:citations": "node scripts/check-citations.js"
   },
   "bugs": {
     "url": "https://github.com/SiluPanda/academic-researcher/issues"
