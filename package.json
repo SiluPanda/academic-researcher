@@ -5,7 +5,7 @@
   "author": "Academic Researcher",
   "repository": {
     "type": "git",
-    "url": "https://github.com/academic-researcher/skill.git"
+    "url": "https://github.com/SiluPanda/academic-researcher.git"
   },
   "keywords": [
     "academic-researcher",
@@ -40,7 +40,7 @@
     "preuninstall": "node uninstall-skill.js"
   },
   "bugs": {
-    "url": "https://github.com/academic-researcher/skill/issues"
+    "url": "https://github.com/SiluPanda/academic-researcher/issues"
   },
-  "homepage": "https://github.com/academic-researcher/skill#readme"
+  "homepage": "https://github.com/SiluPanda/academic-researcher#readme"
 }

@@ -36,18 +36,52 @@ npm install -g academic-researcher-skill
 npm install --save-dev academic-researcher-skill
 ```
 
-### Option 2: npx skills add
+### Option 2: npx skills add (Per Platform)
 
+This skill supports installation via the `npx skills add` command across multiple AI coding platforms:
+
+#### OpenCode
 ```bash
-npx skills add https://github.com/academic-researcher/skill --skill academic-researcher
+npx skills add https://github.com/SiluPanda/academic-researcher --skill academic-researcher
 ```
+OpenCode auto-discovers skills from `.opencode/skills/` directory.
+
+#### Claude Code
+```bash
+npx skills add https://github.com/SiluPanda/academic-researcher --skill academic-researcher
+```
+Claude Code discovers skills from `.claude/skills/` directory.
+
+#### Gemini CLI
+```bash
+npx skills add https://github.com/SiluPanda/academic-researcher --skill academic-researcher
+```
+Gemini CLI supports skills from `.gemini/skills/` directory.
+
+#### Codex
+```bash
+npx skills add https://github.com/SiluPanda/academic-researcher --skill academic-researcher
+```
+Codex uses `.codex/skills/` for skill discovery.
+
+#### Cursor
+```bash
+npx skills add https://github.com/SiluPanda/academic-researcher --skill academic-researcher
+```
+Cursor discovers skills from `.cursor/skills/` directory.
+
+#### Windsurf
+```bash
+npx skills add https://github.com/SiluPanda/academic-researcher --skill academic-researcher
+```
+Windsurf uses `.windsurf/skills/` for skill discovery.
 
 ### Option 3: Manual Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/academic-researcher/skill.git
-cd skill
+git clone https://github.com/SiluPanda/academic-researcher.git
+cd academic-researcher
 
 # Install globally
 npm install -g
@@ -55,14 +89,18 @@ npm install -g
 
 ## Supported Platforms
 
-| Platform | Status | Installation Path |
-|----------|--------|-------------------|
-| OpenCode | ✓ Full | `~/.config/opencode/skills/` or `.opencode/skills/` |
-| Claude Code | ✓ Full | `~/.claude/skills/` or `.claude/skills/` |
-| Gemini CLI | ✓ Full | `~/.gemini/skills/` or `.gemini/skills/` |
-| Codex | ✓ Full | `~/.codex/skills/` or `.codex/skills/` |
-| Cursor | ✓ Full | `~/.cursor/skills/` or `.cursor/skills/` |
-| Windsurf | ✓ Full | `~/.windsurf/skills/` or `.windsurf/skills/` |
+| Platform | Status | Installation Path | Installation Command |
+|----------|--------|-------------------|---------------------|
+| OpenCode | ✓ Full | `~/.config/opencode/skills/` | `npx skills add ...` |
+| Claude Code | ✓ Full | `~/.claude/skills/` | `npx skills add ...` |
+| Gemini CLI | ✓ Full | `~/.gemini/skills/` | `npx skills add ...` |
+| Codex | ✓ Full | `~/.codex/skills/` | `npx skills add ...` |
+| Cursor | ✓ Full | `~/.cursor/skills/` | `npx skills add ...` |
+| Windsurf | ✓ Full | `~/.windsurf/skills/` | `npx skills add ...` |
+
+All platforms use the same skill format and support:
+- Global installation (user-wide)
+- Project-level installation
 
 ## Usage
 
