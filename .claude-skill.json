@@ -1,7 +1,7 @@
 {
   "name": "academic-researcher",
   "description": "Expert-level academic research and LaTeX paper writing with IEEE/APA citation support",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Academic Researcher",
   "license": "MIT",
   "repository": {
