@@ -1,6 +1,6 @@
 {
   "name": "academic-researcher-skill",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Expert-level academic research skill for AI coding assistants. Creates peer-reviewed research papers, literature reviews, and theses with IEEE/APA citations and LaTeX output.",
   "author": "Academic Researcher",
   "repository": {
