@@ -4,6 +4,7 @@
   Simple citation-key check for LaTeX templates:
   - Extracts citation keys used in .tex files under references/templates/
   - Verifies all keys exist in references/templates/references.bib
+  - Reports unused bib entries as warnings
 */
 
 const fs = require('fs');
@@ -59,9 +60,15 @@ const bibKeys = extractBibKeys(bibContent);
 const texFiles = listFilesRecursive(templatesDir).filter((p) => p.endsWith('.tex'));
 let ok = true;
 
+const allCiteKeys = new Set();
+
 for (const texFile of texFiles) {
   const tex = fs.readFileSync(texFile, 'utf8');
   const citeKeys = extractCiteKeys(tex);
+
+  for (const k of citeKeys) {
+    allCiteKeys.add(k);
+  }
 
   const missing = [...citeKeys].filter((k) => !bibKeys.has(k)).sort();
   if (missing.length > 0) {
@@ -70,9 +77,16 @@ for (const texFile of texFiles) {
   }
 }
 
+// Reverse check: report unused bib entries
+const unusedKeys = [...bibKeys].filter((k) => !allCiteKeys.has(k)).sort();
+if (unusedKeys.length > 0) {
+  console.warn(`Warning: unused bib entries in ${rel(bibPath)}: ${unusedKeys.join(', ')}`);
+}
+
 if (!ok) {
   process.exit(1);
 }
 
-console.log(`OK: all citation keys in ${rel(templatesDir)}/*.tex exist in ${rel(bibPath)}`);
-
+console.log(
+  `Checked ${texFiles.length} .tex files, ${allCiteKeys.size} citation keys, ${bibKeys.size} bib entries (${unusedKeys.length} unused)`
+);

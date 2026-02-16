@@ -1,140 +1,88 @@
 # IEEE Citation Guide
 
-Complete reference examples for IEEE format citations.
+BibTeX entry reference for IEEE-style papers. The rendered reference list is generated automatically by `IEEEtran.bst` — focus on writing correct BibTeX entries.
 
-## Journal Articles
+## BibTeX Entry Examples
 
-### Standard Journal Article
-```latex
-[1] A. Author, B. Author, and C. Author, "Title of article," Journal Name, vol. X, no. Y, pp. ZZ-ZZ, Month Year.
+### Journal Article (`@article`)
+```bibtex
+@article{vaswani2017attention,
+  author  = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, {\L}ukasz and Polosukhin, Illia},
+  title   = {Attention Is All You Need},
+  journal = {Advances in Neural Information Processing Systems},
+  year    = {2017},
+  volume  = {30},
+  pages   = {5998--6008},
+  doi     = {10.48550/arXiv.1706.03762}
+}
 ```
 
-### With DOI
-```latex
-[2] A. Author and B. Author, "Title of article with DOI," Journal Name, vol. 10, no. 3, pp. 123-145, 2023, doi: 10.1109/JST.2023.1234567.
+### Conference Paper (`@inproceedings`)
+```bibtex
+@inproceedings{he2016deep,
+  author    = {He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  title     = {Deep Residual Learning for Image Recognition},
+  booktitle = {Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR)},
+  year      = {2016},
+  pages     = {770--778},
+  doi       = {10.1109/CVPR.2016.90}
+}
 ```
 
-### Online Journal Article
-```latex
-[3] A. Author, "Title of online article," Journal Name, Accessed: Month Day, Year. [Online]. Available: https://example.com/article
+### Book (`@book`)
+```bibtex
+@book{goodfellow2016deep,
+  author    = {Goodfellow, Ian and Bengio, Yoshua and Courville, Aaron},
+  title     = {Deep Learning},
+  publisher = {MIT Press},
+  year      = {2016},
+  address   = {Cambridge, MA}
+}
 ```
 
-## Conference Papers
-
-### Conference Proceedings
-```latex
-[4] A. Author and B. Author, "Title of paper," in Proc. IEEE Conference Name, City, Country, Year, pp. ZZ-ZZ.
+### Technical Report (`@techreport`)
+```bibtex
+@techreport{openai2023gpt4,
+  author      = {{OpenAI}},
+  title       = {{GPT-4} Technical Report},
+  institution = {OpenAI},
+  year        = {2023},
+  number      = {arXiv:2303.08774}
+}
 ```
 
-### With Publisher Location
-```latex
-[5] A. Author, "Title of paper," in Proc. Int. Conf. Computing, San Francisco, CA, USA, 2023, pp. 123-130.
+### Thesis (`@phdthesis` / `@mastersthesis`)
+```bibtex
+@phdthesis{mikolov2012phd,
+  author = {Mikolov, Tom{\'a}{\v{s}}},
+  title  = {Statistical Language Models Based on Neural Networks},
+  school = {Brno University of Technology},
+  year   = {2012}
+}
 ```
 
-### Workshop Paper
-```latex
-[6] A. Author and B. Author, "Title of workshop paper," in Proc. IEEE Workshop Name, Seattle, WA, USA, 2022, pp. 45-52.
+### Preprint / Online (`@misc`)
+```bibtex
+@misc{brown2020gpt3,
+  author       = {Brown, Tom and Mann, Benjamin and Ryder, Nick and others},
+  title        = {Language Models are Few-Shot Learners},
+  year         = {2020},
+  eprint       = {2005.14165},
+  archiveprefix= {arXiv},
+  primaryclass = {cs.CL},
+  note         = {Preprint}
+}
 ```
 
-## Books
+## IEEE Journal Abbreviations
 
-### Single Author
-```latex
-[7] A. Author, Title of Book, Edition. City, State: Publisher, Year.
-```
-
-### Multiple Authors
-```latex
-[8] A. Author, B. Author, and C. Author, Title of Book, 2nd ed. City, State: Publisher, Year.
-```
-
-### Edited Book
-```latex
-[9] A. Author, Ed., Title of Book. City, State: Publisher, Year.
-```
-
-## Book Chapters
-
-```latex
-[10] A. Author, "Title of chapter," in Title of Book, 2nd ed., B. Author, Ed. City, State: Publisher, Year, pp. ZZ-ZZ.
-```
-
-## Technical Reports
-
-```latex
-[11] A. Author, "Title of report," Institution, City, State, Rep. Number, Month Year.
-```
-
-```latex
-[12] A. Author, "Technical report title," Dept. Abbrev., University, City, State, Tech. Rep. TR-2023-01, 2023.
-```
-
-## Theses and Dissertations
-
-### PhD Dissertation
-```latex
-[13] A. Author, "Title of dissertation," Ph.D. dissertation, Dept. Abbrev., University, City, State, Year.
-```
-
-### Master's Thesis
-```latex
-[14] A. Author, "Title of thesis," M.S. thesis, Dept. Abbrev., University, City, State, Year.
-```
-
-## Standards
-
-```latex
-[15] Title of Standard, Standard Number, Year.
-```
-
-```latex
-[16] IEEE Standard for Wireless LANs, IEEE Std 802.11-2020, 2020.
-```
-
-## Patents
-
-```latex
-[17] A. Inventor, "Title of patent," Country Patent Number, Month Day, Year.
-```
-
-## Online Sources
-
-### Website
-```latex
-[18] A. Author. "Title of webpage." Website Name. URL (accessed Month Day, Year).
-```
-
-### Online Database
-```latex
-[19] A. Author, "Title of entry," in Encyclopedia Name, Online ed. City, State: Publisher, Year. [Online]. Available: URL
-```
-
-## Multiple Authors
-
-### Two Authors
-```latex
-[20] A. Author and B. Author, "Title of paper," Journal Name, vol. X, pp. ZZ-ZZ, Year.
-```
-
-### Three or More Authors
-```latex
-[21] A. Author, B. Author, C. Author, and D. Author, "Title of paper," Journal Name, vol. X, no. Y, pp. ZZ-ZZ, Year.
-```
-
-### More Than Six Authors
-```latex
-[22] A. Author et al., "Title of paper," Journal Name, vol. X, no. Y, pp. ZZ-ZZ, Year.
-```
-
-## IEEE Abbreviations for Journals
-
-| Abbreviation | Journal Name |
-|--------------|---------------|
-| IEEE Trans. Commun. | IEEE Transactions on Communications |
-| IEEE Trans. Inf. Theory | IEEE Transactions on Information Theory |
+| Abbreviation | Full Name |
+|---|---|
 | IEEE Trans. Pattern Anal. Mach. Intell. | IEEE Transactions on Pattern Analysis and Machine Intelligence |
 | IEEE Trans. Neural Netw. Learn. Syst. | IEEE Transactions on Neural Networks and Learning Systems |
 | IEEE Trans. Knowl. Data Eng. | IEEE Transactions on Knowledge and Data Engineering |
+| IEEE Trans. Inf. Theory | IEEE Transactions on Information Theory |
+| IEEE Trans. Commun. | IEEE Transactions on Communications |
 | IEEE Commun. Mag. | IEEE Communications Magazine |
 | IEEE Access | IEEE Access |
 | Proc. IEEE | Proceedings of the IEEE |
@@ -142,9 +90,16 @@ Complete reference examples for IEEE format citations.
 ## Key Rules
 
 1. Number references consecutively in order of appearance
-2. Use square brackets [1], [2], [3]
+2. Use square brackets `[1]`, `[2]`, `[3]`
 3. List all authors if ≤6; use "et al." if >6
 4. Use initials for first/middle names
-5. Abbreviate journal names per IEEE standards
+5. Abbreviate journal names per IEEE standards (use `booktitle` abbreviation in `@inproceedings`)
 6. Include DOI when available
 7. Maintain consistent formatting throughout
+
+## Policy
+
+- **DOI-first**: always include DOI when available — `IEEEtran.bst` formats it automatically
+- **Citation keys**: use `firstauthorYYYY` or `firstauthorYYYYkeyword` (e.g., `he2016deep`)
+- **Preprints**: use `@misc` with `note = {Preprint}` and the arXiv eprint fields; clearly distinguish from peer-reviewed work
+- **Validate entries**: run `node scripts/validate-bib.js references.bib` to check DOIs against CrossRef

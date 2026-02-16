@@ -134,7 +134,7 @@ function installToPlatform(platformName, scope, globalPath, projectPath) {
 
 console.log(`\n📦 Installing skill: ${skillName}\n`);
 
-const platformsToInstall = ['claude-code', 'opencode', 'codex', 'gemini-cli', 'cursor', 'windsurf'];
+const platformsToInstall = Object.keys(platforms);
 const scope = resolveInstallScope();
 
 if (scope === 'none') {

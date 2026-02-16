@@ -112,7 +112,7 @@ Use your platform's browsing/search tool. If browsing is unavailable, ask the us
 Query patterns to use:
 
 - Broad first: `broad topic` + `survey` / `review`
-- Recent window: add a year range (e.g., `2022..2026`) or use the tool's recency filter
+- Recent window: add a year range (e.g., last 3-5 years) or use the tool's recency filter
 - Exact phrase: `"exact phrase"`
 - Boolean combos: `(term1 AND term2) OR term3`
 - Snowballing: find "references" (backward) and "cited by" (forward) from 2-3 anchor papers
@@ -180,6 +180,28 @@ Create a source database (and keep `references.bib` as the single source of trut
 ```
 
 See `references/source-evaluation.md` and `references/bibliography-workflows.md`.
+
+### Paper Access Strategy
+
+When you find a relevant paper but cannot access the full text:
+
+1. **Check open access first:**
+   - Run `node scripts/resolve-papers.js --doi "10.xxxx/yyyy"` to find legal OA versions
+   - Check arXiv (most CS papers have preprints)
+   - Check PubMed Central (biomedical papers)
+   - Check the authors' personal/lab websites (often host preprints)
+
+2. **Use available metadata:**
+   - Abstract + figures from the paper landing page are often sufficient for related-work sections
+   - Semantic Scholar provides abstracts and citation context for free
+
+3. **Ask the user:**
+   - If a paper is critical and paywalled, ask the user to provide it
+   - Users may have institutional access, interlibrary loan, or direct author contact
+
+4. **Be transparent:**
+   - If citing a paper you could only read the abstract of, note this limitation
+   - Never fabricate content from a paper you haven't read
 
 ---
 
@@ -283,12 +305,15 @@ See `references/systematic-review-prisma.md`.
 
 ### LaTeX Document Setup
 
-Prefer starting from the included templates:
+For submission, prefer official publisher templates (see `references/official-templates.md`). The templates below are scaffolds for learning the structure.
+
+Included templates:
 - `references/templates/ieee-conference.tex` (IEEE conference paper)
 - `references/templates/literature-review.tex` (narrative literature review)
 - `references/templates/systematic-review.tex` (systematic review)
 - `references/templates/thesis.tex` (thesis/dissertation)
 - `references/templates/apa7-manuscript.tex` (APA 7 manuscript)
+- `references/templates/research-proposal.tex` (research proposal)
 
 Minimal IEEE skeleton (BibTeX):
 
@@ -333,7 +358,8 @@ keyword1, keyword2, keyword3
 
 **Tone:**
 - Formal and objective
-- Third person (avoid "I" or "we" unless describing your contributions)
+- Use "we" for multi-author papers when describing your work (standard in CS/Engineering)
+- Use third person for discussing other work ("Smith et al. proposed...")
 - Precise technical terminology
 - Present tense for established facts, past tense for specific studies
 
@@ -353,9 +379,27 @@ Multiple studies support this finding \cite{smith2023, jones2022, doe2021}.
 
 **APA Style (author-date):**
 ```latex
-Recent work has shown this approach is effective (Smith, 2023).
-Multiple studies support this finding (Smith, 2023; Jones, 2022).
+% Parenthetical (APA author-date)
+Recent work has shown this approach is effective \parencite{smith2023}.
+Multiple studies support this finding \parencite{smith2023,jones2022}.
+
+% Narrative
+\textcite{smith2023} demonstrated this approach is effective.
 ```
+
+### Paragraph Structure
+
+Each paragraph should follow a clear pattern:
+1. **Topic sentence** — state the main point
+2. **Evidence/Support** — cite sources or present data
+3. **Analysis** — explain what the evidence means
+4. **Transition** — connect to the next paragraph
+
+### Transition Patterns
+- Contrast: "However," "In contrast," "While X focuses on..."
+- Extension: "Building on this," "Furthermore," "Similarly,"
+- Consequence: "As a result," "Therefore," "This suggests that"
+- Gap: "Despite these advances," "However, X remains unexplored"
 
 ### Mathematical Typesetting
 
@@ -546,5 +590,11 @@ If LaTeX is not suitable, I can also generate:
 - `references/reproducibility-checklist.md` - Reproducibility QA checklist
 - `references/statistical-reporting.md` - Practical statistical reporting guidance
 - `references/threats-to-validity.md` - Threats-to-validity prompts
-- `references/templates/` - LaTeX templates (IEEE, APA, thesis, reviews)
+- `references/acm-citation-guide.md` - ACM citation format reference
+- `references/revision-response-guide.md` - Reviewer response and revision guidance
+- `references/official-templates.md` - Links to official publisher LaTeX templates
+- `references/templates/` - LaTeX templates (IEEE, APA, thesis, reviews, proposals)
 - `examples/` - Protocols and working templates (vocabulary, extraction matrix, claim-evidence map)
+- `scripts/resolve-papers.js` - Paper discovery and open-access resolution via Semantic Scholar, Unpaywall, CrossRef
+- `scripts/validate-bib.js` - BibTeX entry validation against CrossRef
+- `scripts/check-citations.js` - Citation key consistency checker

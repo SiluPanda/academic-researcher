@@ -289,7 +289,7 @@ Or: `\lVert x \rVert`
 
 ## Tips
 
-1. **Always use `\( ... \)`** for inline math (not `$...$` in modern LaTeX)
+1. **Both `$...$` and `\(...\)` are valid** for inline math; `\(...\)` is recommended in large documents for better error localization
 2. **Use `align` for multi-line** equations (not `eqnarray`)
 3. **Reference with `\eqref{name}`** for equation references
 4. **Use `\text{...}`** for text within math mode
@@ -297,13 +297,13 @@ Or: `\lVert x \rVert`
 
 ## IEEE Specific
 
-IEEE uses `康` for displayed equations (single column):
+IEEE papers can use `IEEEeqnarray` for displayed equations (preferred over `eqnarray`):
 
 ```latex
-\beginIEEEeqnarray}{rCl}
+\begin{IEEEeqnarray}{rCl}
 f(x) &=& (x+1)^2 \\
      &=& x^2 + 2x + 1
-\endIEEEeqnarray}
+\end{IEEEeqnarray}
 ```
 
-Requires: `\usepackage[retainorg]{IEEEtrantools}`
+Requires: `\usepackage[retainorgcmds]{IEEEtrantools}`

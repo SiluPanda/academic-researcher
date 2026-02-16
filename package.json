@@ -17,7 +17,10 @@
     "academic",
     "latex",
     "paper",
-    "thesis"
+    "thesis",
+    "systematic-review",
+    "literature-review",
+    "bibtex"
   ],
   "license": "MIT",
   "main": "index.js",
@@ -41,7 +44,9 @@
     "postinstall": "node install-skill.js",
     "preuninstall": "node uninstall-skill.js",
     "sync:platforms": "node scripts/sync-platform-skills.js",
-    "check:citations": "node scripts/check-citations.js"
+    "check:citations": "node scripts/check-citations.js",
+    "resolve": "node scripts/resolve-papers.js",
+    "validate:bib": "node scripts/validate-bib.js"
   },
   "bugs": {
     "url": "https://github.com/SiluPanda/academic-researcher/issues"

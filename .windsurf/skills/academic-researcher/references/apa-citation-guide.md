@@ -1,148 +1,105 @@
 # APA Citation Guide (7th Edition)
 
-Complete reference examples for APA format citations.
+BibTeX entry reference for APA-style papers. The rendered reference list is generated automatically by `biblatex-apa` — focus on writing correct BibTeX entries and using the right in-text citation commands.
 
-## Journal Articles
+## BibTeX Entry Examples
 
-### Standard Journal Article
-```latex
-Author, A. A., & Author, B. B. (Year). Title of article. Journal Name, Volume(Issue), page-page. https://doi.org/xxxxx
+### Journal Article (`@article`)
+```bibtex
+@article{bandura1977self,
+  author  = {Bandura, Albert},
+  title   = {Self-Efficacy: Toward a Unifying Theory of Behavioral Change},
+  journal = {Psychological Review},
+  year    = {1977},
+  volume  = {84},
+  number  = {2},
+  pages   = {191--215},
+  doi     = {10.1037/0033-295X.84.2.191}
+}
 ```
 
-### With DOI
-```latex
-Author, A. A., & Author, B. B. (2023). Title of article with DOI. Journal Name, 10(3), 123-145. https://doi.org/10.1000/xyz123
+### Conference Paper (`@inproceedings`)
+```bibtex
+@inproceedings{devlin2019bert,
+  author    = {Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina},
+  title     = {{BERT}: Pre-Training of Deep Bidirectional Transformers for Language Understanding},
+  booktitle = {Proceedings of the 2019 Conference of the North {A}merican Chapter of the Association for Computational Linguistics},
+  year      = {2019},
+  pages     = {4171--4186},
+  doi       = {10.18653/v1/N19-1423}
+}
 ```
 
-### Online-Only Journal
-```latex
-Author, A. A. (2023). Title of online article. Journal Name, 10(2), 1-15. https://doi.org/10.1000/xyz123
+### Book (`@book`)
+```bibtex
+@book{creswell2018research,
+  author    = {Creswell, John W. and Creswell, J. David},
+  title     = {Research Design: Qualitative, Quantitative, and Mixed Methods Approaches},
+  edition   = {5th},
+  publisher = {SAGE Publications},
+  year      = {2018}
+}
 ```
 
-### No DOI (Common Databases)
-```latex
-Author, A. A., & Author, B. B. (2023). Title of article. Journal Name, 10(3), 123-145.
+### Technical Report (`@techreport`)
+```bibtex
+@techreport{who2023report,
+  author      = {{World Health Organization}},
+  title       = {Global Status Report on Road Safety 2023},
+  institution = {World Health Organization},
+  year        = {2023},
+  address     = {Geneva, Switzerland}
+}
 ```
 
-## Conference Papers
-
-### Conference Proceedings (Published)
-```latex
-Author, A. A., & Author, B. B. (2023, June). Title of paper. In E. E. Editor (Ed.), Proceedings of the Conference Name (pp. 123-130). Publisher. https://doi.org/xxxxx
+### Thesis (`@phdthesis` / `@mastersthesis`)
+```bibtex
+@phdthesis{johnson2020phd,
+  author = {Johnson, Maria},
+  title  = {Exploring User Engagement in Mobile Health Applications},
+  school = {Stanford University},
+  year   = {2020}
+}
 ```
 
-### Conference Proceedings (No DOI/URL)
-```latex
-Author, A. A., & Author, B. B. (2023, June). Title of paper. In Proceedings of the Conference Name (pp. 123-130). Publisher.
+### Online / Preprint (`@misc`)
+```bibtex
+@misc{radford2021clip,
+  author       = {Radford, Alec and Kim, Jong Wook and Hallacy, Chris and others},
+  title        = {Learning Transferable Visual Models From Natural Language Supervision},
+  year         = {2021},
+  eprint       = {2103.00020},
+  archiveprefix= {arXiv},
+  primaryclass = {cs.CV},
+  note         = {Preprint}
+}
 ```
 
-### Poster Presentation
-```latex
-Author, A. A. (Year, Month). Title of poster [Poster presentation]. Conference Name, City, Country.
-```
-
-## Books
-
-### Single Author
-```latex
-Author, A. A. (Year). Title of book. Publisher.
-```
-
-### Multiple Authors
-```latex
-Author, A. A., Author, B. B., & Author, C. C. (Year). Title of book. Publisher.
-```
-
-### Edited Book
-```latex
-Author, A. A. (Ed.). (Year). Title of book. Publisher.
-```
-
-### Edition
-```latex
-Author, A. A. (Year). Title of book (2nd ed.). Publisher.
-```
-
-## Book Chapters
+## BibLaTeX Configuration
 
 ```latex
-Author, A. A., & Author, B. B. (Year). Title of chapter. In A. Editor (Ed.), Title of book (pp. xx-xx). Publisher.
+\usepackage[style=apa,backend=biber]{biblatex}
+\addbibresource{references.bib}
+\DeclareLanguageMapping{english}{english-apa}
+
+% At end of document:
+\printbibliography
 ```
 
-## Technical Reports
-
-```latex
-Author, A. A., & Author, B. B. (Year). Title of report (Report No. Number). Institution. URL
-```
-
-```latex
-Author, A. A. (2023). Title of technical report (Tech. Rep. No. 2023-01). University Name. https://xxxxx
-```
-
-## Theses and Dissertations
-
-### Doctoral Dissertation
-```latex
-Author, A. A. (Year). Title of dissertation [Doctoral dissertation, University Name]. Database Name.
-```
-
-### Master's Thesis
-```latex
-Author, A. A. (Year). Title of thesis [Master's thesis, University Name]. Database Name.
-```
-
-## Online Sources
-
-### Website
-```latex
-Author, A. A. (Year, Month Day). Title of webpage. Site Name. URL
-```
-
-### No Author
-```latex
-Title of page. (Year, Month Day). Site Name. URL
-```
-
-### Encyclopedia Article
-```latex
-Author, A. A. (Year). Title of article. In Encyclopedia Name (Volume, pp. xx-xx). Publisher. URL
-```
-
-## Multiple Authors
-
-### Two Authors
-```latex
-Author, A. A., & Author, B. B. (Year). Title of paper. Journal Name, 10(3), 123-145.
-```
-
-### Three or More Authors
-```latex
-Author, A. A., Author, B. B., Author, C. C., & Author, D. D. (Year). Title of paper. Journal Name, 10(3), 123-145.
-```
+Compile with: `pdflatex → biber → pdflatex → pdflatex`
 
 ## In-Text Citations
 
-### Narrative Citation
 ```latex
-Smith (2023) argues that...
-According to Smith (2023)...
-```
+% Parenthetical (author-date in parentheses)
+Recent work shows this is effective \parencite{bandura1977self}.
+Multiple studies support this \parencite{bandura1977self,devlin2019bert}.
 
-### Parenthetical Citation
-```latex
-...as shown in previous studies (Smith, 2023).
-...multiple studies confirm this (Smith, 2023; Jones, 2022).
-```
+% Narrative (author in running text)
+\textcite{bandura1977self} argued that self-efficacy is...
 
-### Direct Quote
-```latex
-"The results indicate..." (Smith, 2023, p. 45).
-"Direct quote here" (Smith, 2023, pp. 45-46).
-```
-
-### Secondary Source
-```latex
-as cited in Smith (2023)
+% Direct quote — include page number
+"The results indicate..." \parencite[p.~45]{bandura1977self}.
 ```
 
 ## Key Differences from IEEE
@@ -151,14 +108,20 @@ as cited in Smith (2023)
 |--------|-----|------|
 | Order | Alphabetical by author | Numbered by appearance |
 | Format | Author-Date | [Number] |
-| Et al. | 3+ authors in in-text citations (from first citation) | 6+ authors |
+| Et al. | 3+ authors in in-text (from first citation) | 6+ authors |
 | DOI | Required when available | Preferred |
 | Italics | Journal name italicized | Journal name abbreviated |
 
-## APA 7th Edition Changes
+## APA 7th Edition Notes
 
-1. **DOI format**: Use https://doi.org/ prefix (no need for http://dx.doi.org/)
-2. **Retrieved from**: Only use when retrieval date is needed (unstable sources)
-3. **No issue number**: When journal uses continuous pagination
-4. **21+ authors**: List first 19, then ellipsis, then final author
-5. **Software/Apps**: Include in references like books
+1. **DOI format**: use `https://doi.org/` prefix
+2. **Retrieved from**: only use when retrieval date matters (unstable sources)
+3. **21+ authors**: list first 19, ellipsis, then final author
+4. **Software/Apps**: include in references like books
+
+## Policy
+
+- **DOI-first**: always include DOI — `biblatex-apa` formats it automatically
+- **Citation keys**: use `firstauthorYYYY` or `firstauthorYYYYkeyword`
+- **Preprints**: use `@misc` with `note = {Preprint}` — clearly distinguish from peer-reviewed
+- **Validate entries**: run `node scripts/validate-bib.js references.bib` to check DOIs against CrossRef
